@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список мест работы и стаж</title>
+    <style>
+      body {
+        background-color: #f0f8ff;
+        font-family: Arial, sans-serif;
+        margin: 2em;
+      }
+      header {
+        background-color: #005f73;
+        color: white;
+        padding: 1em;
+        border-radius: 0.5em;
+      }
+      form, ul {
+        margin-top: 1em;
+      }
+      input, button {
+        padding: 0.5em;
+        margin-right: 0.5em;
+        border-radius: 0.3em;
+        border: 1px solid #ccc;
+      }
+      button {
+        cursor: pointer;
+        background-color: #0a9396;
+        color: white;
+        border: none;
+      }
+      li {
+        margin-bottom: 0.5em;
+      }
+      .total {
+        margin-top: 1.5em;
+        font-weight: bold;
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <h1>Мой список мест работы и опыт</h1>
+  </header>
+
+  <!-- Форма для добавления места работы -->
+  <form method="POST">
+    <input type="text" name="company" placeholder="Название компании" required>
+    <input type="number" name="term" placeholder="Срок (месяцев)" min="0" required>
+    <button type="submit">Добавить</button>
+  </form>
+
+  <!-- Кнопка для очистки всей ленты сообщений -->
+  <form method="POST" action="{{ url_for('clear') }}">
+    <button type="submit">Очистить</button>
+  </form>
+
+  <!-- Список записей -->
+  <ul>
+    {% for job in jobs %}
+      <li><strong>{{ job.company }}</strong> – {{ job.term }} месяцев</li>
+    {% endfor %}
+  </ul>
+
+  <!-- Общий стаж -->
+  <div class="total">
+    Общий стаж: {{ total }} месяцев
+  </div>
+</body>
+</html>
